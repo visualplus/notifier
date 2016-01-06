@@ -1,6 +1,6 @@
 <?php
 return [
-    'schedule' => '',
+    'schedule' => Visualplus\Pusher\SmsScheduler::class,
 
     'sms' => [
         'sender'    => '',
