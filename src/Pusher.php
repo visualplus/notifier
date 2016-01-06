@@ -32,7 +32,7 @@ class Pusher
 
     public function Send(User $user, Message $message, $device = 'android')
     {
-        if ($device == 'android') {
+        if ($user->getAndroidDeviceId()) {
             $this->androidPusher->send($user->getAndroidDeviceId(), $message->getAndroidMessage());
         }
 
