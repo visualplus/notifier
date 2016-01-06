@@ -1,6 +1,6 @@
-<?php namespace Visualplus\Notifier;
+<?php namespace Visualplus\Pusher;
 
-class User implements Visualplus\Notifier\Contracts\User
+class User implements Visualplus\Pusher\Contracts\User
 {
     private $hp = '';
     private $androidDeviceId = '';

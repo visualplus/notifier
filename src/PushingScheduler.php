@@ -1,16 +1,16 @@
-<?php namespace Visualplus\Notifier;
+<?php namespace Visualplus\Pusher;
 
 use Illuminate\Console\Command;
 use Carbon\Carbon;
 
-class NotifyScheduler extends Command
+class PushingScheduler extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'notifier:do';
+    protected $signature = 'pusher:do';
 
     /**
      * The console command description.
@@ -26,8 +26,8 @@ class NotifyScheduler extends Command
      */
     public function handle()
     {
-        $scheduleModel = new config('notifier.schedule');
-        $smsSender = new config('notifier.sms.sender');
+        $scheduleModel = new config('pusher.schedule');
+        $smsSender = new config('pusher.sms.sender');
 
         $schedules = $scheduleModel->where('sending_at', '<=', Carbon::now()->format('Y-m-d H:i:00'))->get();
         foreach ($schedules as $schedule) {

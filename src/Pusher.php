@@ -1,11 +1,11 @@
-<?php namespace Visualplus\Notifier;
+<?php namespace Visualplus\Pusher;
 
-use Visualplus\Notifier\Contracts\User;
-use Visualplus\Notifier\Contracts\Message;
+use Visualplus\Pusher\Contracts\User;
+use Visualplus\Pusher\Contracts\Message;
 
 use Carbon\Carbon;
 
-class Notifier
+class Pusher
 {
     /**
      * SMS 전송 클래스
@@ -20,11 +20,11 @@ class Notifier
     private $androidPusher = '';
 
     /**
-     * Notifier constructor.
+     * Pusher constructor.
      */
     public function __construct()
     {
-        $config = config('notifier');
+        $config = config('pusher');
 
         $this->smsSender = new $config['sms']['sender'];
         $this->androidPusher = new $config['android']['sender'];
@@ -36,11 +36,11 @@ class Notifier
             $this->androidPusher->send($user->getAndroidDeviceId(), $message->getAndroidMessage());
         }
 
-        $schedule = new config('notifier.schedule');
+        $schedule = new config('pusher.schedule');
 
         $schedule->hp = $user->getHp();
         $schedule->content = $message->getSmsMessage();
-        $schedule->sending_at = Carbon::now()->addMinutes(config('notifier.sms_after'))->format('Y-m-d H:i:00');
+        $schedule->sending_at = Carbon::now()->addMinutes(config('pusher.sms_after'))->format('Y-m-d H:i:00');
         $schedule->save();
     }
 }

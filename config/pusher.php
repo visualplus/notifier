@@ -7,7 +7,7 @@ return [
     ],
 
     'android' => [
-        'sender'    => Visualplus\Notifier\AndroidPusher::class,
+        'sender'    => Visualplus\Pusher\AndroidPusher::class,
         'api_key'   => '',
     ],
 

@@ -1,4 +1,4 @@
-<?php namespace Visualplus\Notifier\Contracts;
+<?php namespace Visualplus\Pusher\Contracts;
 
 interface AndroidPusher {
     // 개별 전송
