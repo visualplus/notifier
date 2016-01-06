@@ -1,8 +1,5 @@
 {
     "name": "visualplus/notifier",
-    "require": {
-        "witty/laravel-push-notification": "1.0.0"
-    },
     "license": "MIT",
     "autoload": {
         "psr-4": {
