@@ -1,9 +1,9 @@
 {
-    "name": "visualplus/notifier",
+    "name": "visualplus/pusher",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Visualplus\\Notifier\\": "src/"
+            "Visualplus\\Pusher\\": "src/"
         }
     },
     "authors": [
