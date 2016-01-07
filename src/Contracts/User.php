@@ -3,5 +3,5 @@
 interface User
 {
     public function getHp();
-    public function getAndroidDeviceId();
+    public function addAndroidDeviceId();
 }
