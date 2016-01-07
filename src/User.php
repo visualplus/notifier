@@ -3,7 +3,7 @@
 class User implements \Visualplus\Pusher\Contracts\User
 {
     private $hp = '';
-    private $androidDeviceId = '';
+    private $androidDeviceId = [];
 
     /**
      * @return string
@@ -32,9 +32,9 @@ class User implements \Visualplus\Pusher\Contracts\User
     /**
      * @param string $androidDeviceId
      */
-    public function setAndroidDeviceId($androidDeviceId)
+    public function addAndroidDeviceId($androidDeviceId)
     {
-        $this->androidDeviceId = $androidDeviceId;
+        array_push($this->androidDeviceId, $androidDeviceId);
     }
 
 
