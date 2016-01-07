@@ -35,9 +35,10 @@ class Pusher
      * @param Message $message
      * @param string $uniqueKey
      */
-    public function send(User $user, Message $message, $uniqueKey)
+    public function send(User $user, Message $message, $uniqueKey, $sms_immediately = false)
     {
         $config = config('pusher');
+
         // 안드로이드 디바이스 아이디가 있으면 푸시 전송
         if ($user->getAndroidDeviceId()) {
             $this->androidPusher->send($user->getAndroidDeviceId(), $message->getAndroidMessage());
@@ -47,10 +48,15 @@ class Pusher
         if ($user->getHp()) {
             $schedule = new $config['schedule'];
 
+            $timeOffset = config('pusher.sms_after');
+            if ($sms_immediately) {
+                $timeOffset = 0;
+            }
+
             $schedule->hp = $user->getHp();
             $schedule->content = $message->getSmsMessage();
             $schedule->unique_key = $uniqueKey;
-            $schedule->sending_at = Carbon::now()->addMinutes(config('pusher.sms_after'))->format('Y-m-d H:i:00');
+            $schedule->sending_at = Carbon::now()->addMinutes($timeOffset)->format('Y-m-d H:i:00');
 
             $schedule->save();
         }
