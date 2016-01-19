@@ -26,8 +26,11 @@ class PushingScheduler extends Command
      */
     public function handle()
     {
-        $scheduleModel = new config('pusher.schedule');
-        $smsSender = new config('pusher.sms.sender');
+        $scheduleModelClass = config('pusher.schedule');
+        $smsSenderClass = config('pusher.sms.sender');
+
+        $scheduleModel = new $scheduleModelClass;
+        $smsSender = new $smsSenderClass;
 
         $schedules = $scheduleModel->where('sending_at', '<=', Carbon::now()->format('Y-m-d H:i:00'))->get();
         foreach ($schedules as $schedule) {
