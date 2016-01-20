@@ -1,6 +1,6 @@
 <?php namespace Visualplus\Pusher;
 
-class Message implements \Visualplus\Pusher\Contracts\Message
+class PusherMessage implements \Visualplus\Pusher\Contracts\Message
 {
     private $smsMessage = '';
     private $androidMessage = '';
