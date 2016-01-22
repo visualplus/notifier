@@ -58,7 +58,7 @@ class Pusher
             $schedule->unique_key = $uniqueKey;
             $schedule->sending_at = Carbon::now()->addMinutes($timeOffset)->format('Y-m-d H:i:00');
 
-            //$schedule->save();
+            $schedule->save();
         }
     }
 
