@@ -8,7 +8,6 @@
 
 namespace Visualplus\Pusher\Contracts\MessageContainer;
 
-
 abstract class AbstractPushMessageContainer
 {
     /**
