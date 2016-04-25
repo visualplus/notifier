@@ -14,11 +14,11 @@ abstract class AbstractPushMessageContainer
     /**
      * @var string
      */
-    private $identifier;
+    protected $identifier;
     /**
      * @var array
      */
-    private $param;
+    protected $param;
 
     /**
      * AbstractPushMessageContainer constructor.
