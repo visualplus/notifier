@@ -70,6 +70,19 @@ abstract class AbstractPushMessageContainer
     }
 
     /**
+     * @param $url
+     * @return string
+     */
+    protected function makeUrl($url)
+    {
+        if (!starts_with($url, '/')) {
+            $url = '/' . $url;
+        }
+
+        return env('APP_URL') . $url;
+    }
+
+    /**
      * @return string
      */
     abstract protected function getMessageBody();
