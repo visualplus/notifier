@@ -8,6 +8,8 @@
 
 namespace Visualplus\Pusher\Contracts\MessageContainer;
 
+use App\Member;
+
 abstract class AbstractPushMessageContainer
 {
     /**
@@ -18,16 +20,22 @@ abstract class AbstractPushMessageContainer
      * @var array
      */
     protected $param;
+    /**
+     * @var Member
+     */
+    protected $member;
 
     /**
      * AbstractPushMessageContainer constructor.
+     * @param Member $member
      * @param $identifier
      * @param array $param
      */
-    public function __construct($identifier, array $param)
+    public function __construct(Member $member, $identifier, array $param)
     {
         $this->identifier = $identifier;
         $this->param = $param;
+        $this->member = $member;
     }
 
     /**
