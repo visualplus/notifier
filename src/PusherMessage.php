@@ -1,19 +1,28 @@
 <?php namespace Visualplus\Pusher;
 
-class PusherMessage implements \Visualplus\Pusher\Contracts\Message
+use Visualplus\Pusher\Contracts\Message;
+use Visualplus\Pusher\Contracts\MessageContainer\AbstractPushMessageContainer;
+
+class PusherMessage implements Message
 {
+    /**
+     * @var string
+     */
     private $smsMessage = '';
-    private $androidMessage = '';
+    /**
+     * @var AbstractPushMessageContainer
+     */
+    private $pushMessage;
 
     /**
      * Message constructor.
-     * @param $smsMessage
-     * @param $androidMessage
+     * @param string $smsMessage
+     * @param AbstractPushMessageContainer $pushMessage
      */
-    public function __construct($smsMessage, $androidMessage)
+    public function __construct($smsMessage, AbstractPushMessageContainer $pushMessage)
     {
         $this->smsMessage = $smsMessage;
-        $this->androidMessage = $androidMessage;
+        $this->pushMessage = $pushMessage;
     }
 
     /**
@@ -27,8 +36,24 @@ class PusherMessage implements \Visualplus\Pusher\Contracts\Message
     /**
      * @return string
      */
-    public function getAndroidMessage()
+    public function getPushMessage()
     {
-        return $this->androidMessage;
+        return $this->pushMessage->getMessage();
+    }
+
+    /**
+     * @return array
+     */
+    public function getPushMessageOptionAsAndroidFormat()
+    {
+        return $this->pushMessage->getOptionsAsAndroidFormat();
+    }
+
+    /**
+     * @return array
+     */
+    public function getPushMessageOptionAsIosFormat()
+    {
+        return $this->pushMessage->getOptionsAsIosFormat();
     }
 }

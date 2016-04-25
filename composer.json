@@ -1,6 +1,9 @@
 {
     "name": "visualplus/pusher",
     "license": "MIT",
+    "require": {
+        "davibennun/laravel-push-notification": "dev-laravel5"
+    },
     "autoload": {
         "psr-4": {
             "Visualplus\\Pusher\\": "src/"

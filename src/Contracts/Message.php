@@ -2,6 +2,23 @@
 
 interface Message
 {
+    /**
+     * @return string
+     */
     public function getSmsMessage();
-    public function getAndroidMessage();
+
+    /**
+     * @return string
+     */
+    public function getPushMessage();
+
+    /**
+     * @return array
+     */
+    public function getPushMessageOptionAsAndroidFormat();
+
+    /**
+     * @return array
+     */
+    public function getPushMessageOptionAsIosFormat();
 }

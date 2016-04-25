@@ -1,9 +1,21 @@
 <?php namespace Visualplus\Pusher;
 
-class PusherUser implements \Visualplus\Pusher\Contracts\User
+use Visualplus\Pusher\Contracts\User;
+
+class PusherUser implements User
 {
+    /**
+     * @var string
+     */
     private $hp = '';
+    /**
+     * @var array
+     */
     private $androidDeviceId = [];
+    /**
+     * @var array
+     */
+    private $iosDeviceId = [];
 
     /**
      * @return string
@@ -22,7 +34,7 @@ class PusherUser implements \Visualplus\Pusher\Contracts\User
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getAndroidDeviceId()
     {
@@ -37,5 +49,19 @@ class PusherUser implements \Visualplus\Pusher\Contracts\User
         array_push($this->androidDeviceId, $androidDeviceId);
     }
 
+    /**
+     * @return array
+     */
+    public function getIosDeviceId()
+    {
+        return $this->iosDeviceId;
+    }
 
+    /**
+     * @param string $iosDeviceId
+     */
+    public function addIosDeviceId($iosDeviceId)
+    {
+        array_push($this->iosDeviceId, $iosDeviceId);
+    }
 }

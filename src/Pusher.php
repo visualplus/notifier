@@ -1,47 +1,50 @@
 <?php namespace Visualplus\Pusher;
 
+use Davibennun\LaravelPushNotification\PushNotification;
 use Visualplus\Pusher\Contracts\User;
 use Visualplus\Pusher\Contracts\Message;
-
-use Carbon\Carbon;
 
 class Pusher
 {
     /**
-     * SMS 전송 클래스
-     * @var
+     * @var PushNotification
      */
-    private $smsSender = '';
-
-    /**
-     * 안드로이드 푸시 클래스
-     * @var
-     */
-    private $androidPusher = '';
+    private $pushNotification;
 
     /**
      * Pusher constructor.
      */
     public function __construct()
     {
-        $config = config('pusher');
-
-        $this->smsSender = new $config['sms']['sender'];
-        $this->androidPusher = new $config['android']['sender'];
+        $this->pushNotification = new PushNotification();
     }
 
     /**
      * @param User $user
      * @param Message $message
      * @param string $uniqueKey
+     * @param bool $sms_immediately
      */
     public function send(User $user, Message $message, $uniqueKey, $sms_immediately = false)
     {
         $config = config('pusher');
 
-        // 안드로이드 디바이스 아이디가 있으면 푸시 전송
-        if (COUNT($user->getAndroidDeviceId()) > 0) {
-            $this->androidPusher->send($user->getAndroidDeviceId(), $message->getAndroidMessage());
+        if (count($user->getAndroidDeviceId()) > 0) {
+            foreach ($user->getAndroidDeviceId() as $androidDeviceId) {
+                $this->pushNotification->app('android')->to($androidDeviceId)->send([
+                    '',
+                    array_merge(['msg' => $message->getPushMessage()], $message->getPushMessageOptionAsAndroidFormat()),
+                ]);
+            }
+        }
+
+        if (count($user->getIosDeviceId()) > 0) {
+            foreach ($user->getIosDeviceId() as $iosDeviceId) {
+                $this->pushNotification->app('ios')->to($iosDeviceId)->send([
+                    $message->getPushMessage(),
+                    $message->getPushMessageOptionAsIosFormat(),
+                ]);
+            }
         }
 
         // 핸드폰번호가 세팅되어있으면 문자보내기 큐에다 저장
