@@ -14,33 +14,21 @@ abstract class AbstractPushMessageContainer
     /**
      * @var string
      */
-    private $message;
-    /**
-     * @var string
-     */
     private $identifier;
     /**
-     * @var string
+     * @var array
      */
-    private $uniqueKey;
-    /**
-     * @var string
-     */
-    private $url;
+    private $param;
 
     /**
      * AbstractPushMessageContainer constructor.
-     * @param $message
      * @param $identifier
-     * @param $uniqueKey
-     * @param $url
+     * @param array $param
      */
-    public function __construct($message, $identifier, $uniqueKey, $url)
+    public function __construct($identifier, array $param)
     {
-        $this->message = $message;
         $this->identifier = $identifier;
-        $this->uniqueKey = $uniqueKey;
-        $this->url = $url;
+        $this->param = $param;
     }
 
     /**
@@ -59,8 +47,8 @@ abstract class AbstractPushMessageContainer
         return [
             'title' => '오투잡',
             'identifier' => $this->identifier,
-            'unique_key' => $this->uniqueKey,
-            'url' => url($this->url),
+            'unique_key' => $this->getUniqueKey(),
+            'url' => $this->getUrl(),
             'sound' => 'Y',
         ];
     }
@@ -75,8 +63,8 @@ abstract class AbstractPushMessageContainer
             'sound' => 'default',
             'custom' => [
                 'identifier' => $this->identifier,
-                'url' => url($this->url),
-                'unique_key' => $this->uniqueKey,
+                'url' => $this->getUrl(),
+                'unique_key' => $this->getUniqueKey(),
             ],
         ];
     }
@@ -85,4 +73,14 @@ abstract class AbstractPushMessageContainer
      * @return string
      */
     abstract protected function getMessageBody();
+
+    /**
+     * @return string
+     */
+    abstract protected function getUniqueKey();
+
+    /**
+     * @return string
+     */
+    abstract protected function getUrl();
 }
