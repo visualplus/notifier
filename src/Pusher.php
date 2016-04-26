@@ -60,7 +60,7 @@ class Pusher
 
             $schedule->hp = $user->getHp();
             $schedule->content = $message->getSmsMessage();
-            $schedule->unique_key = $uniqueKey;
+            $schedule->unique_key = $message->getUniqueKey();
             $schedule->sending_at = Carbon::now()->addMinutes($timeOffset)->format('Y-m-d H:i:00');
 
             $schedule->save();
