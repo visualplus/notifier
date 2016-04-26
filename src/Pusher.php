@@ -24,10 +24,9 @@ class Pusher
     /**
      * @param User $user
      * @param Message $message
-     * @param string $uniqueKey
      * @param bool $sms_immediately
      */
-    public function send(User $user, Message $message, $uniqueKey, $sms_immediately = false)
+    public function send(User $user, Message $message, $sms_immediately = false)
     {
         $config = config('pusher');
 
