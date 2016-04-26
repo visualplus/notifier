@@ -97,7 +97,7 @@ abstract class AbstractPushMessageContainer
     /**
      * @return string
      */
-    abstract protected function getUniqueKey();
+    abstract public function getUniqueKey();
 
     /**
      * @return string

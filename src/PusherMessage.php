@@ -36,6 +36,18 @@ class PusherMessage implements Message
     /**
      * @return string
      */
+    public function getUniqueKey()
+    {
+        if ($this->pushMessage !== null) {
+            return $this->pushMessage->getUniqueKey();
+        }
+
+        return '';
+    }
+
+    /**
+     * @return string
+     */
     public function getPushMessage()
     {
         return $this->pushMessage->getMessage();

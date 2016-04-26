@@ -21,4 +21,9 @@ interface Message
      * @return array
      */
     public function getPushMessageOptionAsIosFormat();
+
+    /**
+     * @return string
+     */
+    public function getUniqueKey();
 }
