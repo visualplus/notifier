@@ -4,6 +4,8 @@ use Davibennun\LaravelPushNotification\PushNotification;
 use Visualplus\Pusher\Contracts\User;
 use Visualplus\Pusher\Contracts\Message;
 
+use Carbon\Carbon;
+
 class Pusher
 {
     /**
@@ -31,19 +33,19 @@ class Pusher
 
         if (count($user->getAndroidDeviceId()) > 0) {
             foreach ($user->getAndroidDeviceId() as $androidDeviceId) {
-                $this->pushNotification->app('android')->to($androidDeviceId)->send([
+                $this->pushNotification->app('android')->to($androidDeviceId)->send(
                     '',
-                    array_merge(['msg' => $message->getPushMessage()], $message->getPushMessageOptionAsAndroidFormat()),
-                ]);
+                    array_merge(['msg' => $message->getPushMessage()], $message->getPushMessageOptionAsAndroidFormat())
+                );
             }
         }
 
         if (count($user->getIosDeviceId()) > 0) {
             foreach ($user->getIosDeviceId() as $iosDeviceId) {
-                $this->pushNotification->app('ios')->to($iosDeviceId)->send([
+                $this->pushNotification->app('ios')->to($iosDeviceId)->send(
                     $message->getPushMessage(),
-                    $message->getPushMessageOptionAsIosFormat(),
-                ]);
+                    $message->getPushMessageOptionAsIosFormat()
+                );
             }
         }
 
