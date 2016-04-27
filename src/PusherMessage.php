@@ -19,7 +19,7 @@ class PusherMessage implements Message
      * @param string $smsMessage
      * @param AbstractPushMessageContainer $pushMessage
      */
-    public function __construct($smsMessage, AbstractPushMessageContainer $pushMessage)
+    public function __construct($smsMessage, AbstractPushMessageContainer $pushMessage = null)
     {
         $this->smsMessage = $smsMessage;
         $this->pushMessage = $pushMessage;
@@ -50,7 +50,11 @@ class PusherMessage implements Message
      */
     public function getPushMessage()
     {
-        return $this->pushMessage->getMessage();
+        if ($this->pushMessage !== null) {
+            return $this->pushMessage->getMessage();
+        }
+
+        return '';
     }
 
     /**
@@ -58,7 +62,11 @@ class PusherMessage implements Message
      */
     public function getPushMessageOptionAsAndroidFormat()
     {
-        return $this->pushMessage->getOptionsAsAndroidFormat();
+        if ($this->pushMessage !== null) {
+            return $this->pushMessage->getOptionsAsAndroidFormat();
+        }
+
+        return [];
     }
 
     /**
@@ -66,6 +74,10 @@ class PusherMessage implements Message
      */
     public function getPushMessageOptionAsIosFormat()
     {
-        return $this->pushMessage->getOptionsAsIosFormat();
+        if ($this->pushMessage !== null) {
+            return $this->pushMessage->getOptionsAsIosFormat();
+        }
+
+        return [];
     }
 }
