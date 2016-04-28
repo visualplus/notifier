@@ -66,7 +66,7 @@ abstract class AbstractPushMessageContainer
     public function getOptionsAsIosFormat()
     {
         return [
-            'badge' => 0,
+            'badge' => -1,
             'sound' => 'default',
             'custom' => [
                 'identifier' => $this->identifier,
